@@ -1,0 +1,22 @@
+public void Load()
+        {
+             try
+             {
+                 sql = "select * from student";
+                 cmd = new SqlCommand(sql, con);
+                 con.Open();
+                 read = cmd.ExecuteReader();
+                 dataGridView1.Rows.Clear();
+ 
+                 while(read.Read())
+                 {
+                     dataGridView1.Rows.Add(read[0],read[1],read[2],read[3]);
+                 }
+                 con.Close();
+             }
+             catch(Exception ex)
+             {
+                 MessageBox.Show(ex.Message);
+ 
+             }
+}
