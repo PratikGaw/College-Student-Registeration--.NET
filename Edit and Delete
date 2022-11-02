@@ -1,0 +1,15 @@
+public void getID(String id)
+         {
+             sql = "select * from student where id = '" +  id + "'  ";
+             cmd = new SqlCommand(sql, con);
+             con.Open();
+             read = cmd.ExecuteReader();
+ 
+            while(read.Read())
+            {
+                txtName.Text = read[1].ToString();
+                txtCourse.Text = read[2].ToString();
+                txtFee.Text = read[3].ToString();
+            }
+            con.Close();
+         }
