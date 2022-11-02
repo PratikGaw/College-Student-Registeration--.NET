@@ -1,0 +1,47 @@
+private void button1_Click(object sender, EventArgs e)
+        {
+            string studentname = txtName.Text;
+            string courses = txtCourse.Text;
+            string fees = txtFee.Text;
+ 
+            if(Mode == true)
+            {
+                sql = "insert into student(stname,course,fee) values(@stname,@course,@fee)";
+                con.Open();
+                cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@stname", studentname);
+                cmd.Parameters.AddWithValue("@course", courses);
+                cmd.Parameters.AddWithValue("@fee", fees);
+                MessageBox.Show("Record Addddedddd");
+                cmd.ExecuteNonQuery();
+ 
+                txtName.Clear();
+                txtCourse.Clear();
+                txtFee.Clear();
+                txtName.Focus();
+ 
+            }
+            else
+            {
+                id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                sql = "update student set stname = @stname, course= @course,fee = @fee where id = @id";
+                con.Open();
+                cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@stname", studentname);
+                cmd.Parameters.AddWithValue("@course", courses);
+                cmd.Parameters.AddWithValue("@fee", fees);
+                cmd.Parameters.AddWithValue("@id", id);
+                MessageBox.Show("Record Updateddddd");
+                cmd.ExecuteNonQuery();
+ 
+                txtName.Clear();
+                txtCourse.Clear();
+                txtFee.Clear();
+                txtName.Focus();
+                button1.Text = "Save";
+                Mode = true;
+ 
+            }
+   con.Close();
+ 
+}
