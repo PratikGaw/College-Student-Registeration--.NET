@@ -1,0 +1,24 @@
+private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+ 
+            if(e.ColumnIndex == dataGridView1.Columns["Edit"].Index && e.RowIndex >= 0)
+            {
+                Mode = false;
+                id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                getID(id);
+                button1.Text = "Edit";
+ 
+            }
+            else if(e.ColumnIndex == dataGridView1.Columns["Delete"].Index && e.RowIndex >= 0)
+            {
+                Mode = false;
+                id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                sql = "delete from student where id  = @id ";
+                con.Open();
+                cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id ", id);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Record Deleteeeee");
+                con.Close();
+            }
+  }
